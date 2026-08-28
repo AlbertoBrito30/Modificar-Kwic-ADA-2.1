@@ -16,17 +16,17 @@ public class LogicKwic {
     private final Set<String> palabrasIgnoradas = new HashSet<>(Arrays.asList("de", "el", "la", "los", "las", "a", "en", "y"));
 
     //variables de estructuras
-    private final Scanner sc;
+    private final Scanner sc = new Scanner(System.in);
     private List<List<String>> listaPalabras;
 
     //variables
     private String texto = "";
 
-    public LogicKwic(Scanner sc, List<List<String>> listaPalabras) {
-        this.sc = sc;
-        this.listaPalabras = listaPalabras;
-
-    }
+//    public LogicKwic(Scanner sc, List<List<String>> listaPalabras) {
+//        this.sc = sc;
+//        this.listaPalabras = listaPalabras;
+//
+//    }
 
     private String pedirTexto() {
         System.out.println("Ingrese su palabra: ");
@@ -51,7 +51,7 @@ public class LogicKwic {
     }
     
     private List<String> filtrarListaPalabras(List<String> auxList){
-        List<String> auxTexto;
+        List<String> auxTexto = new ArrayList<>();
         
         auxTexto = auxList.stream()
                 .filter(actual -> !palabrasIgnoradas.contains(actual.toLowerCase()))
@@ -62,7 +62,7 @@ public class LogicKwic {
 
     private List<List<String>> listaPalabras() {
         
-        List<String> auxTexto;
+        List<String> auxTexto = new ArrayList<>();
         
         do {
             texto = pedirTexto();
@@ -74,22 +74,27 @@ public class LogicKwic {
         return listaPalabras;
     }
     
-    public List<String> generadorColas(List<List<String>> lista){
-        Queue<String> colita = new ArrayDeque<>();
+    public List<String> generadorColas(List<List<String>> lista) {
+        List<String> auxList = new ArrayList<>();
+
         String auxText = "";
-        
+
         for (List<String> listaPalabras : lista) {
+            Queue<String> colita = new ArrayDeque<>(listaPalabras);
+
             for (int i = 0; i < listaPalabras.size(); i++) {
-                auxText = listaPalabras.get(i);
-                colita.offer(auxText);
-                
+                auxText = String.join(" ", colita).trim();
+                auxList.add(auxText);
+                colita.offer(colita.poll());
+
             }
-            
+
         }
-        
-        
+
+        Collections.sort(auxList);
+
         return auxList;
     }
-    
+
 
 }
