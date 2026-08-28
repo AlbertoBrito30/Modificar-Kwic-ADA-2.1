@@ -17,7 +17,7 @@ public class LogicKwic {
 
     //variables de estructuras
     private final Scanner sc = new Scanner(System.in);
-    private List<List<String>> listaPalabras;
+    private List<List<String>> listaPalabras = new ArrayList<>();
 
     //variables
     private String texto = "";
