@@ -22,12 +22,6 @@ public class LogicKwic {
     //variables
     private String texto = "";
 
-//    public LogicKwic(Scanner sc, List<List<String>> listaPalabras) {
-//        this.sc = sc;
-//        this.listaPalabras = listaPalabras;
-//
-//    }
-
     private String pedirTexto() {
         System.out.println("Ingrese su palabra: ");
         return sc.nextLine();
@@ -50,7 +44,7 @@ public class LogicKwic {
         }
     }
     
-    private List<String> filtrarListaPalabras(List<String> auxList){
+    public List<String> filtrarListaPalabras(List<String> auxList){
         List<String> auxTexto = new ArrayList<>();
         
         auxTexto = auxList.stream()
@@ -60,7 +54,7 @@ public class LogicKwic {
         return auxTexto;
     }
 
-    private List<List<String>> listaPalabras() {
+    public List<List<String>> pedirPalabras() {
         
         List<String> auxTexto = new ArrayList<>();
         
@@ -94,6 +88,14 @@ public class LogicKwic {
         Collections.sort(auxList);
 
         return auxList;
+    }
+    
+    public void imprimirPalabras(List<String> auxList){
+        for (String string : auxList) {
+            System.out.println(string);
+            
+        }
+        
     }
 
 
